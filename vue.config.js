@@ -1,10 +1,10 @@
-const path = require('path');
+const path = require('path')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 //   .BundleAnalyzerPlugin;
 
 module.exports = {
   css: {
-    extract: false,
+    extract: false
   },
   outputDir: 'lib',
   configureWebpack: {
@@ -12,9 +12,9 @@ module.exports = {
     // plugins: [new BundleAnalyzerPlugin()],
     resolve: {
       alias: {
-        '@': path.resolve('src'),
-      },
-    },
+        '@': path.resolve('src')
+      }
+    }
   },
-  lintOnSave: undefined,
-};
+  lintOnSave: undefined
+}
