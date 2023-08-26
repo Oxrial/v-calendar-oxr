@@ -68,6 +68,7 @@ methods: {
 }
 ```
 <guide-selector-index container-id="month3" menu />
+
 ## 2. Scoped Slot
 ### day-content (dayClass <i>**(new)**</i>)
 

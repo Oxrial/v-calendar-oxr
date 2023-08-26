@@ -4,13 +4,14 @@
         class="custom-calendar"
         :attributes="attributes"
         is-selector
-        :check-selection-covered="day => check && day.date.getTime() >= day.todayTime"
+        :check-selection-covered="day => (check ? day.date.getTime() >= day.todayTime : true)"
         :container-id="containerId"
-        @month-context-menu="menu && contextMenu"
+        @month-context-menu="(selector, e) => menu && contextMenu(selector, e)"
     >
         <template v-if="slotDay" #day-content="{ day, attributes: attrs, dayProps, dayEvents, dayClass }">
             <div :class="dayClass" v-bind="dayProps" v-on="dayEvents">
                 <div class="day-label">{{ day.day }}</div>
+                🌟
             </div>
         </template>
         <template v-if="slotSelection" #selection-content="{ selector }">
