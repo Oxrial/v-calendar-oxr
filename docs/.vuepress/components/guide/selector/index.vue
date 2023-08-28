@@ -191,7 +191,6 @@ export default {
     background-color: #63b3ed;
 }
 .custom-calendar ::v-deep .vc-day {
-    padding: 0 5px 3px 5px;
     text-align: left;
     height: var(--day-height);
     min-width: var(--day-width);
@@ -220,8 +219,9 @@ export default {
     background-color: var(--orange-200);
 }
 .custom-calendar ::v-deep .vc-day .vc-day-content {
+    padding: 0 5px 3px 5px;
     display: block;
-    width: auto;
+    width: 100%;
     line-height: unset;
     height: 100%;
     border-radius: unset;

@@ -2,10 +2,11 @@
 title: 'Selector'
 sidebarDepth: 2
 ---
-# Selector
+# Selector <i>**(new)**</i>
 
 ## 1. Attibutes
 ### 1.1 enable selector
+ctrl & shift hold on support
 
 ```html
     <v-calendar
@@ -15,7 +16,10 @@ sidebarDepth: 2
 ```
 <guide-selector-index />
 
+![](./images/1.png)
+
 ### 1.2 containerId
+
 当存在一个以上的多个v-calendar标签时，需通过自定义containerId区分各自的唯一索引，确保命中目标标签 <br />
 When there are multiple v-calendar tags, it is necessary to differentiate their unique indexes by customizing the containerId, in order to ensure that the target tag is correctly identified. 
 
@@ -50,8 +54,11 @@ methods: {
 }
 ```
 <guide-selector-index container-id="month2" check />
+![](./images/2.png)
 
 ### 1.4 context menu event
+example: use vue-contextmenujs module
+
 ```html
     <v-calendar
         :attributes="attributes"
@@ -67,10 +74,12 @@ methods: {
     }
 }
 ```
+
 <guide-selector-index container-id="month3" menu />
+![](./images/3.png)
 
 ## 2. Scoped Slot
-### day-content (dayClass <i>**(new)**</i>)
+### day-content (dayClass <i>**(new)**</i> export default day-content)
 
 
 ```html
@@ -101,3 +110,5 @@ methods: {
     </v-calendar>
 ```
 <guide-selector-index slot-selection  container-id="month5" />
+
+![](./images/4.png)

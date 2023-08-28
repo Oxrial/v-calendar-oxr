@@ -85,7 +85,7 @@ module.exports = {
                     children: ['colors-dark-mode', 'layouts', 'navigation', 'attributes', 'datepicker', 'timezones', 'i18n']
                 },
                 {
-                    title: 'Selector',
+                    title: 'Selector (new)',
                     collapsable: false,
                     children: ['selector']
                 },

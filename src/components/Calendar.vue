@@ -359,6 +359,7 @@ export default {
                 this.transitionName = this.getPageTransition(this.pages[0], pages[0], transition)
                 // Assign the new pages
                 this.pages = pages
+                this.isSelector && this.selectorInit()
                 // Emit page update events
                 this.$emit('update:from-page', fromPage)
                 this.$emit('update:to-page', toPage)
