@@ -54,6 +54,7 @@ methods: {
 }
 ```
 <guide-selector-index container-id="month2" check />
+
 ![](./docs/images/2.png)
 
 ### 1.4 context menu event
@@ -76,6 +77,7 @@ methods: {
 ```
 
 <guide-selector-index container-id="month3" menu />
+
 ![](./docs/images/3.png)
 
 ## 2. Scoped Slot

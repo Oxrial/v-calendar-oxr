@@ -2,8 +2,8 @@
   "name": "v-calendar",
   "version": "2.4.1",
   "private": false,
-  "description": "A clean and extendable plugin for building simple attributed calendars in Vue.js.",
-  "author": "Nathan Reyes <nathanreyes@me.com>",
+  "description": "A based from https://github.com/nathanreyes/v-calendar，selector support",
+  "author": "Oxrial",
   "scripts": {
     "serve": "vue-cli-service serve src/lib.js",
     "build": "pnpm run build:lib && pnpm run build:calendar && pnpm run build:date-picker && pnpm run build:popover && pnpm run build:popover-row",
@@ -71,7 +71,7 @@
     "not ie 11",
     "not op_mini all"
   ],
-  "homepage": "https://vcalendar.io",
+  "homepage": "https://github.com/Oxrial/v-calendar-oxr",
   "keywords": [
     "vue",
     "vuejs",
@@ -89,6 +89,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nathanreyes/v-calendar"
+    "url": "https://github.com/Oxrial/v-calendar-oxr"
   }
 }
