@@ -1,4 +1,4 @@
-import { cloneDeep, isUndefined, remove } from 'lodash'
+import { cloneDeep, isUndefined, remove } from 'lodash-es'
 export class Selector {
     shiftDown = false
     ctrlDown = false

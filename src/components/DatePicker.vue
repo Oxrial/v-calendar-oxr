@@ -4,7 +4,8 @@ import Popover from './Popover'
 import TimePicker from './TimePicker'
 import { rootMixin } from '../utils/mixins'
 import { datesAreEqual, createGuid, elementContains, pageIsBetweenPages, on, off } from '../utils/helpers'
-import { isObject, isArray } from '../utils/_'
+import { _isObject } from '../utils/_'
+import { isArrayLikeObject } from 'lodash-es'
 import { showPopover as sp, hidePopover as hp, togglePopover as tp, getPopoverTriggerEvents } from '../utils/popovers'
 import { PATCH } from '../utils/locale'
 
@@ -172,7 +173,7 @@ export default {
             return attribute
         },
         attributes_() {
-            const attrs = isArray(this.attributes) ? [...this.attributes] : []
+            const attrs = isArrayLikeObject(this.attributes) ? [...this.attributes] : []
             if (this.dragAttribute_) {
                 attrs.push(this.dragAttribute_)
             } else if (this.selectAttribute_) {
@@ -380,7 +381,7 @@ export default {
             })
         },
         normalizeConfig(config, baseConfig = this.modelConfig_) {
-            config = isArray(config) ? config : [config.start || config, config.end || config]
+            config = isArrayLikeObject(config) ? config : [config.start || config, config.end || config]
             return baseConfig.map((b, i) => ({
                 validHours: this.validHours,
                 minuteIncrement: this.minuteIncrement,
@@ -468,7 +469,7 @@ export default {
         },
         hasValue(value) {
             if (this.isRange) {
-                return isObject(value) && !!value.start && !!value.end
+                return _isObject(value) && !!value.start && !!value.end
             }
             return !!value
         },

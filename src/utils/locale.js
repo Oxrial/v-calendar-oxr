@@ -7,7 +7,8 @@ import addDays from 'date-fns/addDays'
 import DateInfo from './dateInfo'
 import defaultLocales from './defaults/locales'
 import { pad, addPages, arrayHasItems } from './helpers'
-import { isDate, isNumber, isString, isObject, isArray, has, defaultsDeep, clamp, pick } from './_'
+import { _isDate, _isObject } from './_'
+import { isNumber, isString, isArrayLikeObject, has, defaultsDeep, clamp, pick } from 'lodash-es'
 
 export const PATCH = {
     DATE_TIME: 1,
@@ -288,7 +289,7 @@ export function resolveConfig(config, locales) {
     // Add fallback and spread default locale to prevent repetitive update loops
     const defLocale = { ...locales['en-IE'], ...locales[id], id }
     // Assign or merge defaults with provided config
-    config = isObject(config) ? defaultsDeep(config, defLocale) : defLocale
+    config = _isObject(config) ? defaultsDeep(config, defLocale) : defLocale
     // Return resolved config
     return config
 }
@@ -430,12 +431,12 @@ export default class Locale {
         } else if (isString(d)) {
             type = 'string'
             result = d ? this.parse(d, mask || 'iso') : null
-        } else if (isObject(d)) {
+        } else if (_isObject(d)) {
             type = 'object'
             result = this.getDateFromParts(d)
         } else {
             type = 'date'
-            result = isDate(d) ? new Date(d.getTime()) : null
+            result = _isDate(d) ? new Date(d.getTime()) : null
         }
 
         if (result && patch) {
@@ -471,8 +472,8 @@ export default class Locale {
 
     hourIsValid(hour, validHours, dateParts) {
         if (!validHours) return true
-        if (isArray(validHours)) return validHours.includes(hour)
-        if (isObject(validHours)) {
+        if (isArrayLikeObject(validHours)) return validHours.includes(hour)
+        if (_isObject(validHours)) {
             const min = validHours.min || 0
             const max = validHours.max || 24
             return min <= hour && max >= hour
@@ -542,7 +543,7 @@ export default class Locale {
         opts = opts || {}
         opts.locale = this
         // Assign dates
-        return (isArray(dates) ? dates : [dates]).map(d => d && (d instanceof DateInfo ? d : new DateInfo(d, opts))).filter(d => d)
+        return (isArrayLikeObject(dates) ? dates : [dates]).map(d => d && (d instanceof DateInfo ? d : new DateInfo(d, opts))).filter(d => d)
     }
 
     getDateParts(date, timezone = this.timezone) {
@@ -629,10 +630,10 @@ export default class Locale {
         if (isString(arg)) {
             return this.getDateParts(this.normalizeDate(arg))
         }
-        if (isDate(arg)) {
+        if (_isDate(arg)) {
             return this.getDateParts(arg)
         }
-        if (isObject(arg)) {
+        if (_isObject(arg)) {
             return arg
         }
         return null

@@ -1,7 +1,7 @@
 <script>
 import { createPopper } from '@popperjs/core'
 import { on, off, elementContains } from '../utils/helpers'
-import { isFunction } from '../utils/_'
+import { isFunction } from 'lodash-es'
 
 export default {
     name: 'Popover',

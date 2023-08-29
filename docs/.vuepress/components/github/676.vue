@@ -8,7 +8,7 @@
 
 <script>
 import timezones from '../../../../tests/timezones';
-import { padStart, orderBy } from 'lodash';
+import { padStart, orderBy } from 'lodash-es';
 
 export default {
   githubTitle: "Certain dates can't be highlighted",

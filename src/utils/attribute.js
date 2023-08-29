@@ -1,6 +1,6 @@
 import DateInfo from './dateInfo'
 import { arrayHasItems, createGuid } from './helpers'
-import { isUndefined, some } from './_'
+import { isUndefined, some } from 'lodash-es'
 
 export default class Attribute {
     constructor(

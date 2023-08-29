@@ -1,4 +1,4 @@
-import { toPairs } from '../_'
+import { toPairs } from 'lodash-es'
 
 const locales = {
     // Arabic

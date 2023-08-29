@@ -63,7 +63,7 @@
 <script>
 import SvgIcon from './SvgIcon'
 import { childMixin } from '../utils/mixins'
-import { head, last } from '../utils/_'
+import { head, last } from 'lodash-es'
 import { onSpaceOrEnter, pad } from '../utils/helpers'
 
 const _yearGroupCount = 12

@@ -1,4 +1,5 @@
-import { isArray, isObject, isFunction, isDate } from './_'
+import { _isObject, _isDate } from './_'
+import { isArrayLikeObject, isFunction } from 'lodash-es'
 
 export const pad = (val, len, char = '0') => {
     val = val !== null && val !== undefined ? String(val) : ''
@@ -72,7 +73,7 @@ export const mergeEvents = (...args) => {
         Object.entries(e).forEach(([key, value]) => {
             if (!result[key]) {
                 result[key] = value
-            } else if (isArray(result[key])) {
+            } else if (isArrayLikeObject(result[key])) {
                 result[key].push(value)
             } else {
                 result[key] = [result[key], value]
@@ -134,14 +135,14 @@ export const pageRangeToArray = (from, to) => {
 }
 
 export function datesAreEqual(a, b) {
-    const aIsDate = isDate(a)
-    const bIsDate = isDate(b)
+    const aIsDate = _isDate(a)
+    const bIsDate = _isDate(b)
     if (!aIsDate && !bIsDate) return true
     if (aIsDate !== bIsDate) return false
     return a.getTime() === b.getTime()
 }
 
-export const arrayHasItems = array => isArray(array) && array.length
+export const arrayHasItems = array => isArrayLikeObject(array) && array.length
 
 export const mixinOptionalProps = (source, target, props) => {
     const assigned = []
@@ -151,7 +152,7 @@ export const mixinOptionalProps = (source, target, props) => {
         const validate = p.validate
         if (Object.prototype.hasOwnProperty.call(source, name)) {
             const value = validate ? validate(source[name]) : source[name]
-            target[name] = mixin && isObject(value) ? { ...mixin, ...value } : value
+            target[name] = mixin && _isObject(value) ? { ...mixin, ...value } : value
             assigned.push(name)
         }
     })

@@ -22,7 +22,7 @@
 
 <script>
 import { generateOptimalTextColor, setColor } from '@/utils/helpers'
-import { flatMap, groupBy, omit, transform } from 'lodash'
+import { flatMap, groupBy, omit, transform } from 'lodash-es'
 export default {
     name: 'Selector',
     props: {

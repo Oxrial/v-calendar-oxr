@@ -1,94 +1,77 @@
 <template>
-  <div class="dropdown-wrapper" :class="{ open }">
-    <button
-      class="dropdown-title text-gray-700 hover:text-indigo-700"
-      type="button"
-      :aria-label="dropdownAriaLabel"
-      @click="toggle"
-    >
-      <span class="title">{{ item.text }}</span>
-      <span class="arrow" :class="open ? 'down' : 'right'"></span>
-    </button>
+    <div class="dropdown-wrapper" :class="{ open }">
+        <button class="dropdown-title text-gray-700 hover:text-indigo-700" type="button" :aria-label="dropdownAriaLabel" @click="toggle">
+            <span class="title">{{ item.text }}</span>
+            <span class="arrow" :class="open ? 'down' : 'right'"></span>
+        </button>
 
-    <DropdownTransition>
-      <ul class="nav-dropdown" v-show="open">
-        <li
-          class="dropdown-item text-gray-700 hover:text-indigo-700"
-          :key="subItem.link || index"
-          v-for="(subItem, index) in item.items"
-        >
-          <h4 v-if="subItem.type === 'links'">{{ subItem.text }}</h4>
+        <DropdownTransition>
+            <ul class="nav-dropdown" v-show="open">
+                <li class="dropdown-item text-gray-700 hover:text-indigo-700" :key="subItem.link || index" v-for="(subItem, index) in item.items">
+                    <h4 v-if="subItem.type === 'links'">{{ subItem.text }}</h4>
 
-          <ul class="dropdown-subitem-wrapper" v-if="subItem.type === 'links'">
-            <li
-              class="dropdown-subitem text-gray-700 hover:text-indigo-700"
-              :key="childSubItem.link"
-              v-for="childSubItem in subItem.items"
-            >
-              <NavLink
-                @focusout="
-                  isLastItemOfArray(childSubItem, subItem.items) &&
-                    isLastItemOfArray(subItem, item.items) &&
-                    toggle()
-                "
-                :item="childSubItem"
-              />
-            </li>
-          </ul>
+                    <ul class="dropdown-subitem-wrapper" v-if="subItem.type === 'links'">
+                        <li
+                            class="dropdown-subitem text-gray-700 hover:text-indigo-700"
+                            :key="childSubItem.link"
+                            v-for="childSubItem in subItem.items"
+                        >
+                            <NavLink
+                                @focusout="isLastItemOfArray(childSubItem, subItem.items) && isLastItemOfArray(subItem, item.items) && toggle()"
+                                :item="childSubItem"
+                            />
+                        </li>
+                    </ul>
 
-          <NavLink
-            v-else
-            @focusout="isLastItemOfArray(subItem, item.items) && toggle()"
-            :item="subItem"
-          />
-        </li>
-      </ul>
-    </DropdownTransition>
-  </div>
+                    <NavLink v-else @focusout="isLastItemOfArray(subItem, item.items) && toggle()" :item="subItem" />
+                </li>
+            </ul>
+        </DropdownTransition>
+    </div>
 </template>
 
 <script>
-import NavLink from '@theme/components/NavLink.vue';
-import DropdownTransition from '@theme/components/DropdownTransition.vue';
-import last from 'lodash/last';
+import NavLink from '@theme/components/NavLink.vue'
+import DropdownTransition from '@theme/components/DropdownTransition.vue'
+import { last } from 'lodash-es'
 
 export default {
-  components: { NavLink, DropdownTransition },
+    components: { NavLink, DropdownTransition },
 
-  data() {
-    return {
-      open: false,
-    };
-  },
-
-  props: {
-    item: {
-      required: true,
-    },
-  },
-
-  computed: {
-    dropdownAriaLabel() {
-      return this.item.ariaLabel || this.item.text;
-    },
-  },
-
-  methods: {
-    toggle() {
-      this.open = !this.open;
+    data() {
+        return {
+            open: false
+        }
     },
 
-    isLastItemOfArray(item, array) {
-      return last(array) === item;
+    props: {
+        item: {
+            required: true
+        }
     },
-  },
 
-  watch: {
-    $route() {
-      this.open = false;
+    computed: {
+        dropdownAriaLabel() {
+            return this.item.ariaLabel || this.item.text
+        }
     },
-  },
-};
+
+    methods: {
+        toggle() {
+            this.open = !this.open
+        },
+
+        isLastItemOfArray(item, array) {
+            return last(array) === item
+        }
+    },
+
+    watch: {
+        $route() {
+            this.open = false
+        }
+    }
+}
 </script>
 
 <style lang="stylus">

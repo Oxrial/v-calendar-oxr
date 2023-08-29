@@ -23,7 +23,8 @@ import {
     arrayHasItems,
     onSpaceOrEnter
 } from '../utils/helpers'
-import { isNumber, isDate, isObject, hasAny, omit, head, last } from '../utils/_'
+import { _isDate, _hasAny, _isObject } from '../utils/_'
+import { isNumber, omit, head, last } from 'lodash-es'
 import '../styles/base.css'
 import selectorMixin, { selectorRender } from './selector'
 
@@ -269,16 +270,16 @@ export default {
         showPageRange(range, opts) {
             let fromPage
             let toPage
-            if (isDate(range)) {
+            if (_isDate(range)) {
                 fromPage = this.pageForDate(range)
-            } else if (isObject(range)) {
+            } else if (_isObject(range)) {
                 const { month, year } = range
                 const { from, to } = range
                 if (isNumber(month) && isNumber(year)) {
                     fromPage = range
                 } else if (from || to) {
-                    fromPage = isDate(from) ? this.pageForDate(from) : from
-                    toPage = isDate(to) ? this.pageForDate(to) : to
+                    fromPage = _isDate(from) ? this.pageForDate(from) : from
+                    toPage = _isDate(to) ? this.pageForDate(to) : to
                 }
             } else {
                 return Promise.reject(new Error('Invalid page range provided.'))
@@ -459,7 +460,7 @@ export default {
                     // If resetting...
                     if (reset) {
                         d.refresh = true
-                    } else if (hasAny(d.attributesMap, deletes)) {
+                    } else if (_hasAny(d.attributesMap, deletes)) {
                         // Delete attributes from the delete list
                         map = omit(d.attributesMap, deletes)
                         // Flag day for refresh

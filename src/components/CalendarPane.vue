@@ -2,7 +2,7 @@
 import CalendarDay from './CalendarDay'
 import { childMixin, safeScopedSlotMixin } from '../utils/mixins'
 import { getPopoverTriggerEvents } from '../utils/popovers'
-import { isBoolean } from '../utils/_'
+import { isBoolean } from 'lodash-es'
 export default {
     name: 'CalendarPane',
     mixins: [childMixin, safeScopedSlotMixin],
