@@ -1,6 +1,6 @@
 {
   "name": "v-calendar-oxr",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "private": false,
   "description": "A based from https://github.com/nathanreyes/v-calendar，selector support",
   "author": "Oxrial",
@@ -18,7 +18,7 @@
     "dev": "vuepress dev docs",
     "test": "vue-cli-service test:unit --watch"
   },
-  "main": "lib/v-calendar.umd.min.js",
+  "main": "lib/v-calendar-oxr.umd.min.js",
   "files": [
     "src",
     "lib"
