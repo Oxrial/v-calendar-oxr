@@ -206,7 +206,7 @@ There are 4 screen sizes provided by default:
 You may use any number of custom named screens. Just pass the your own custom `screens` object as part of the defaults when using VCalendar.
 
 ```js
-import VCalendar from 'v-calendar';
+import VCalendar from 'v-calendar-oxr';
 
 Vue.use(VCalendar, {
   // ...some defaults

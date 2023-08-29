@@ -20,7 +20,6 @@
   },
   "main": "lib/v-calendar-oxr.umd.min.js",
   "files": [
-    "src",
     "lib"
   ],
   "dependencies": {

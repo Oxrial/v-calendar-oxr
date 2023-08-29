@@ -3,7 +3,7 @@ const postcssPresetEnv = require('postcss-preset-env')
 const tailwindcss = require('tailwindcss')
 
 module.exports = {
-    title: 'V-Calendar',
+    title: 'V-Calendar-OXR',
     description: 'An elegant calendar and datepicker plugin for Vuejs.',
     plugins: [
         // Google analytics

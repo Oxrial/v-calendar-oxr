@@ -659,7 +659,7 @@ Finally, if you wish to display indicators with your custom content, you can use
 
 ```js
 // Import popover row component from plugin
-import PopoverRow from 'v-calendar/lib/components/popover-row.umd.min'
+import PopoverRow from 'v-calendar-oxr/lib/components/popover-row.umd.min'
 
 export default {
   components: {

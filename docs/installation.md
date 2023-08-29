@@ -21,7 +21,7 @@ This is the most common use case.
 
 ```js
 import Vue from 'vue';
-import VCalendar from 'v-calendar';
+import VCalendar from 'v-calendar-oxr';
 
 // Use v-calendar & v-date-picker components
 Vue.use(VCalendar, {
@@ -36,18 +36,29 @@ Vue.use(VCalendar, {
 You can also just import components separately.
 
 ```js
-import Calendar from 'v-calendar/lib/components/calendar.umd'
-import DatePicker from 'v-calendar/lib/components/date-picker.umd'
+import Calendar from 'v-calendar-oxr/lib/components/calendar.umd'
+or
+import { VCalendar } from 'v-calendar-oxr'
+
+import DatePicker from 'v-calendar-oxr/lib/components/date-picker.umd'
+or
+import { VDatePicker } from 'v-calendar-oxr'
 
 // Register components in your 'main.js'
 Vue.component('calendar', Calendar)
+Vue.component('calendar', VCalendar)
+Vue.use(VCalendar)
 Vue.component('date-picker', DatePicker)
+Vue.component('date-picker', VDatePicker)
+Vue.use(VDatePicker)
 
 // Or just use in separate component
 export default {
   components: {
     Calendar,
-    DatePicker
+    VCalendar,
+    DatePicker,
+    VDatePicker
   }
   ...
 }
@@ -56,7 +67,7 @@ export default {
 If you would still like to provide [plugin defaults](../api/defaults.md), call `setupCalendar` before using any components.
 
 ```js
-import { setupCalendar} from 'v-calendar'
+import { setupCalendar} from 'v-calendar-oxr'
 
 // main.js
 setupCalendar({
