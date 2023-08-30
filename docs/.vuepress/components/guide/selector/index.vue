@@ -3,7 +3,7 @@
         ref="calendarRef"
         class="custom-calendar"
         :attributes="attributes"
-        is-selector
+        :is-selector="isSelector"
         :check-selection-covered="day => (check ? day.date.getTime() >= day.todayTime : true)"
         :container-id="containerId"
         @month-context-menu="(selector, e) => menu && contextMenu(selector, e)"
@@ -11,7 +11,13 @@
         <template v-if="slotDay" #day-content="{ day, attributes: attrs, dayProps, dayEvents, dayClass }">
             <div :class="dayClass" v-bind="dayProps" v-on="dayEvents">
                 <div class="day-label">{{ day.day }}</div>
-                🌟
+                <div class="day-attrs">
+                    <template v-for="attr in attrs">
+                        <span v-if="attr.customData" :key="attr.customData.name" :class="attr.customData.class" :style="attr.customData.style">{{
+                            attr.customData.name
+                        }}</span>
+                    </template>
+                </div>
             </div>
         </template>
         <template v-if="slotSelection" #selection-content="{ selector }">
@@ -23,9 +29,14 @@
 <script>
 import { generateOptimalTextColor, setColor } from '@/utils/helpers'
 import { flatMap, groupBy, omit, transform } from 'lodash-es'
+import dayjs from 'dayjs'
 export default {
     name: 'Selector',
     props: {
+        isSelector: {
+            type: Boolean,
+            default: true
+        },
         slotDay: {
             type: Boolean,
             default: false
@@ -60,62 +71,59 @@ export default {
     mounted() {
         this.data = [
             {
-                date: '2023-08-13',
+                date: dayjs().toDate(),
                 name: '张三'
             },
             {
-                date: '2023-08-15',
+                date: dayjs().add(1, 'day').toDate(),
                 name: '张三'
             },
             {
-                date: '2023-08-17',
+                date: dayjs().add(3, 'day').toDate(),
                 name: '张三'
             },
             {
-                date: '2023-08-12',
+                date: dayjs().add(1, 'day').toDate(),
                 name: '李四'
             },
             {
-                date: '2023-08-14',
+                date: dayjs().add(3, 'day').toDate(),
                 name: '李四'
             },
             {
-                date: '2023-08-15',
+                date: dayjs().add(4, 'day').toDate(),
                 name: '李四'
             },
             {
-                date: '2023-08-11',
+                date: dayjs().add(-1, 'day').toDate(),
                 name: '王五'
             },
             {
-                date: '2023-08-13',
+                date: dayjs().add(3, 'day').toDate(),
                 name: '王五'
             },
             {
-                date: '2023-08-16',
+                date: dayjs().add(5, 'day').toDate(),
                 name: '王五'
             },
             {
-                date: '2023-08-14',
+                date: dayjs().add(2, 'day').toDate(),
                 name: '赵六'
             },
             {
-                date: '2023-08-17',
+                date: dayjs().add(-3, 'day').toDate(),
                 name: '赵六'
             },
             {
-                date: '2023-08-18',
+                date: dayjs().add(4, 'day').toDate(),
                 name: '赵六'
             }
         ]
+        this.buildAttributes(this.dataAssembleDocs(this.data))
     },
     methods: {
         dataAssembleDocs(data = []) {
-            return transform(
-                groupBy(data, 'userCode'),
-                (res, v) => res.push({ ...omit(v[0], 'date'), name: v[0].name, dates: v.map(vi => vi.date) }),
-                []
-            )
+            return transform(groupBy(data, 'name'), (res, v) => res.push({ ...omit(v[0], 'date'), name: v[0].name, dates: v.map(vi => vi.date) }), [])
         },
         docsLiberateData(docs = []) {
             return flatMap(transform(docs, (res, v) => res.push(v.dates.map(date => ({ date, ...omit(v, 'dates') }))), []))
@@ -129,7 +137,7 @@ export default {
                         class: 'day-content',
                         style: {
                             backgroundColor: colors[i],
-                            color: generateOptimalTextColor(color[i])
+                            color: generateOptimalTextColor(colors[i])
                         }
                     },
                     dates: d.dates
@@ -151,9 +159,7 @@ export default {
                     {
                         label: `新增`,
                         disabled: !selectDays.length,
-                        onClick: () => {
-                            console.log('新增', selectDays)
-                        }
+                        onClick: () => console.log('新增', selectDays)
                     }
                 ],
                 event: e, // 鼠标事件信息
@@ -230,12 +236,22 @@ export default {
     width: 30px;
     text-align: center;
     margin-top: 0.15rem;
-    padding: 0 3px 2px 3px;
+    margin-bottom: 1px;
+    padding: 0 3px 0 3px;
     border-radius: 3px;
     border: 1px solid #fff;
 }
 .custom-calendar ::v-deep .vc-day .vc-day-content:focus {
     border-radius: unset;
+}
+.custom-calendar ::v-deep .vc-day .vc-day-content .day-attrs {
+    display: flex;
+    flex-wrap: wrap;
+}
+.custom-calendar ::v-deep .vc-day .vc-day-content .day-content {
+    padding: 1px 5px;
+    margin: 0 3px 3px 0;
+    border-radius: 3px;
 }
 .custom-calendar ::v-deep .vc-day:hover {
     border: 1px #87c6f3 solid !important;

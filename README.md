@@ -4,9 +4,9 @@ sidebarDepth: 2
 ---
 # Selector <i>**(new)**</i>
 
-## 1. Attibutes
-### 1.1 enable selector
-ctrl & shift hold on support
+## Attibutes
+### isSelector enable selector
+`ctrl` & `shift` hold on support
 
 ```html
     <v-calendar
@@ -18,7 +18,7 @@ ctrl & shift hold on support
 
 ![](./docs/images/1.png)
 
-### 1.2 containerId
+### containerId
 
 当存在一个以上的多个v-calendar标签时，需通过自定义containerId区分各自的唯一索引，确保命中目标标签 <br />
 When there are multiple v-calendar tags, it is necessary to differentiate their unique indexes by customizing the containerId, in order to ensure that the target tag is correctly identified. 
@@ -36,9 +36,8 @@ When there are multiple v-calendar tags, it is necessary to differentiate their 
         default: 'month'
     }
 ```
-<guide-selector-index container-id="month1" />
 
-### 1.3 check selection covered
+### check selection covered
 ```html
     <v-calendar
         :attributes="attributes"
@@ -53,11 +52,11 @@ methods: {
     }
 }
 ```
-<guide-selector-index container-id="month2" check />
+<guide-selector-index container-id="month1" check />
 
 ![](./docs/images/2.png)
 
-### 1.4 context menu event
+### context menu event
 example: use vue-contextmenujs module
 
 ```html
@@ -76,11 +75,11 @@ methods: {
 }
 ```
 
-<guide-selector-index container-id="month3" menu />
+<guide-selector-index container-id="month2" menu />
 
 ![](./docs/images/3.png)
 
-## 2. Scoped Slot
+## Scoped Slot
 ### day-content (dayClass <i>**(new)**</i> export default day-content)
 
 
@@ -96,7 +95,7 @@ methods: {
         </template>
     </v-calendar>
 ```
-<guide-selector-index slot-day container-id="month4" />
+<guide-selector-index slot-day container-id="month3" />
 
 ### selection-content <i>**(new)**</i>
 
@@ -111,6 +110,6 @@ methods: {
         </template>
     </v-calendar>
 ```
-<guide-selector-index slot-selection  container-id="month5" />
+<guide-selector-index slot-selection  container-id="month4" />
 
 ![](./docs/images/4.png)

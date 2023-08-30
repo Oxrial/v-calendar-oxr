@@ -17,11 +17,16 @@ This page is currently being updated.
 [Day Object](./day-object.md)
 
 [Attribute](./attribute.md)
-  * [Highlight](./attribute.mds#highlight)
+  * [Highlight](./attribute.md#highlight)
   * [Dot](./attribute.md#dot)
   * [Bar](./attribute.md#bar)
   * [Popover](./attribute.md#popover)
   * [Content](./attribute.md#content)
+
+[Selector](./selector.md)
+  * [isSelector](./selector.md#isSelector)
+  * [checkSelectionCovered](./selector.md#checkSelectionCovered)
+  * [containerId](./selector.md#containerId)
 
 [Date Picker](./datepicker.md)
   * [Props](./datepicker.md#props)

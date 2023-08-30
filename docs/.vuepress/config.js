@@ -45,7 +45,7 @@ module.exports = {
                 {
                     title: 'API',
                     collapsable: false,
-                    children: ['', 'defaults', 'calendar', 'page-object', 'day-object', 'attribute', 'datepicker', 'date-patterns']
+                    children: ['', 'defaults', 'calendar', 'page-object', 'day-object', 'attribute', 'selector', 'datepicker', 'date-patterns']
                 }
             ],
             '/changelog/': [

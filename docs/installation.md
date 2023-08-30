@@ -11,7 +11,7 @@ title: 'Installation'
 ### 1. Install via npm
 
 ```bash
-npm install v-calendar
+npm install v-calendar-oxr
 ```
 
 ### 2. Import and use VCalendar
@@ -76,7 +76,7 @@ setupCalendar({
 });
 ```
 
-## CDN
+## CDN (<i>unsupported for v-calendar-oxr</i>)
 ```html
 <html>
   <head>
@@ -94,7 +94,7 @@ setupCalendar({
     </div>
 
     <!-- 1. Link Vue Javascript -->
-    <script src='https://unpkg.com/vue/dist/vue.js'></script>
+    <script src='https://unpkg.com/vue/dist/vue.js'></iscript>
 
     <!-- 2. Link VCalendar Javascript (Plugin automatically installed) -->
     <script src='https://unpkg.com/v-calendar'></script>

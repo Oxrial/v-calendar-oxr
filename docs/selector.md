@@ -4,9 +4,9 @@ sidebarDepth: 2
 ---
 # Selector <i>**(new)**</i>
 
-## 1. Attibutes
-### 1.1 enable selector
-ctrl & shift hold on support
+## Attibutes
+### enable selector
+`ctrl` & `shift` hold on support
 
 ```html
     <v-calendar
@@ -18,7 +18,7 @@ ctrl & shift hold on support
 
 ![](./images/1.png)
 
-### 1.2 containerId
+### containerId
 
 当存在一个以上的多个v-calendar标签时，需通过自定义containerId区分各自的唯一索引，确保命中目标标签 <br />
 When there are multiple v-calendar tags, it is necessary to differentiate their unique indexes by customizing the containerId, in order to ensure that the target tag is correctly identified. 
@@ -36,9 +36,8 @@ When there are multiple v-calendar tags, it is necessary to differentiate their 
         default: 'month'
     }
 ```
-<guide-selector-index container-id="month1" />
 
-### 1.3 check selection covered
+### check selection covered
 ```html
     <v-calendar
         :attributes="attributes"
@@ -53,11 +52,11 @@ methods: {
     }
 }
 ```
-<guide-selector-index container-id="month2" check />
+<guide-selector-index container-id="month1" check />
 
 ![](./images/2.png)
 
-### 1.4 context menu event
+### context menu event
 example: use vue-contextmenujs module
 
 ```html
@@ -76,27 +75,34 @@ methods: {
 }
 ```
 
-<guide-selector-index container-id="month3" menu />
+<guide-selector-index container-id="month2" menu />
 
 ![](./images/3.png)
 
-## 2. Scoped Slot
+## Scoped Slot
 ### day-content (dayClass <i>**(new)**</i> export default day-content)
 
 
 ```html
     <v-calendar
         :attributes="attributes"
-        is-selector
     >
         <template #day-content="{ day, attributes: attrs, dayProps, dayEvents, dayClass }">
             <div :class="dayClass" v-bind="dayProps" v-on="dayEvents">
                 <div class="day-label">{{ day.day }}</div>
+                <div class="day-attrs">
+                    <template v-for="attr in attrs">
+                        <span v-if="attr.customData" :key="attr.customData.name" :class="attr.customData.class" :style="attr.customData.style">{{
+                            attr.customData.name
+                        }}</span>
+                    </template>
+                </div>
             </div>
         </template>
     </v-calendar>
 ```
-<guide-selector-index slot-day container-id="month4" />
+<guide-selector-index slot-day container-id="month3" 
+        :is-selector="false" />
 
 ### selection-content <i>**(new)**</i>
 
@@ -111,6 +117,6 @@ methods: {
         </template>
     </v-calendar>
 ```
-<guide-selector-index slot-selection  container-id="month5" />
+<guide-selector-index slot-selection  container-id="month4" />
 
 ![](./images/4.png)
