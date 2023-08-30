@@ -91,11 +91,20 @@ methods: {
         <template #day-content="{ day, attributes: attrs, dayProps, dayEvents, dayClass }">
             <div :class="dayClass" v-bind="dayProps" v-on="dayEvents">
                 <div class="day-label">{{ day.day }}</div>
+                <div class="day-attrs">
+                    <template v-for="attr in attrs">
+                        <span v-if="attr.customData" :key="attr.customData.name" :class="attr.customData.class" :style="attr.customData.style">{{
+                            attr.customData.name
+                        }}</span>
+                    </template>
+                </div>
             </div>
         </template>
     </v-calendar>
 ```
 <guide-selector-index slot-day container-id="month3" />
+
+![](./docs/images/5.png)
 
 ### selection-content <i>**(new)**</i>
 

@@ -104,6 +104,8 @@ methods: {
 <guide-selector-index slot-day container-id="month3" 
         :is-selector="false" />
 
+![](./images/5.png)
+
 ### selection-content <i>**(new)**</i>
 
 
