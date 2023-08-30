@@ -149,23 +149,23 @@ export default {
                 }
             ]
         },
-        contextMenu({ selectDays }, e) {
+        contextMenu({ selectedDays }, e) {
             this.$contextmenu({
                 items: [
                     {
-                        label: `已选择${selectDays.length}天`,
+                        label: `已选择${selectedDays.length}天`,
                         disabled: true
                     },
                     {
                         label: `新增`,
-                        disabled: !selectDays.length,
-                        onClick: () => console.log('新增', selectDays)
+                        disabled: !selectedDays.length,
+                        onClick: () => console.log('新增', selectedDays)
                     }
                 ],
-                event: e, // 鼠标事件信息
-                customClass: 'context-menu', // 自定义菜单 class
-                zIndex: 3, // 菜单样式 z-index
-                minWidth: 230 // 主菜单最小宽度
+                event: e,
+                customClass: 'context-menu',
+                zIndex: 3,
+                minWidth: 230
             })
         }
     }

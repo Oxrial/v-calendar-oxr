@@ -5,8 +5,8 @@ export class Selector {
     keyDown = false
     selectBox = null
     isShowSelectBox = false
-    selectDays = []
-    selectDaysTemp = []
+    selectedDays = []
+    selectedDaysTemp = []
     monthBox = null
     days = []
     daysDom = []
@@ -36,7 +36,7 @@ export function selectorRender(h) {
                             class: 'selection-body'
                         }
                     },
-                    [h('span', `已选择[ ${this.selector.selectDaysTemp.length} ]天`)]
+                    [h('span', `已选择[ ${this.selector.selectedDaysTemp.length} ]天`)]
                 )
         ]
     )
@@ -84,7 +84,7 @@ export default {
             })
         },
         selectorClear(flag = true) {
-            this.selector.selectDays = []
+            this.selector.selectedDays = []
             this.loop([])
             this.selector = new Selector()
             window.removeEventListener('keydown', this.clickKeydown)
@@ -94,9 +94,9 @@ export default {
         handleBox(e) {
             e.stopPropagation()
             if (e.button === 0) {
-                if (!this.selector.ctrlDown && !this.selector.shiftDown && this.selector.selectDays.length !== 0) {
-                    this.selector.selectDays.splice(0, this.selector.selectDays.length)
-                    this.selector.selectDaysTemp.splice(0, this.selector.selectDaysTemp.length)
+                if (!this.selector.ctrlDown && !this.selector.shiftDown && this.selector.selectedDays.length !== 0) {
+                    this.selector.selectedDays.splice(0, this.selector.selectedDays.length)
+                    this.selector.selectedDaysTemp.splice(0, this.selector.selectedDaysTemp.length)
                     this.loop([])
                 }
                 this.selector.downX = e.clientX
@@ -139,8 +139,8 @@ export default {
         },
         moveCover() {
             const { daysDom, days, ctrlDown, shiftDown } = this.selector
-            this.selector.selectDaysTemp = cloneDeep(this.selector.selectDays)
-            !ctrlDown && !shiftDown && (this.selector.selectDaysTemp = [])
+            this.selector.selectedDaysTemp = cloneDeep(this.selector.selectedDays)
+            !ctrlDown && !shiftDown && (this.selector.selectedDaysTemp = [])
             const { offsetWidth: dw, offsetHeight: dh } = daysDom[0]
             const { st, sr, sb, sl } = this.selectDom()
             for (let i = 0, len = daysDom.length; i < len; i++) {
@@ -149,20 +149,20 @@ export default {
                     const { dt, dr, db, dl } = this.dayDom(daysDom[i], dw, dh)
                     // st - dt < dh && dr - sr < dw && db - sb < dh && sl - dl < dw
                     if (db > st && sr > dl && sb > dt && dr > sl) {
-                        const ids = this.selector.selectDaysTemp.map(t => t.id)
+                        const ids = this.selector.selectedDaysTemp.map(t => t.id)
                         if (!ctrlDown && !shiftDown) {
-                            !ids.includes(days[i].id) && this.selector.selectDaysTemp.push(days[i])
+                            !ids.includes(days[i].id) && this.selector.selectedDaysTemp.push(days[i])
                         } else {
                             if (!ids.includes(days[i].id)) {
-                                this.selector.selectDaysTemp.push(days[i])
+                                this.selector.selectedDaysTemp.push(days[i])
                             } else {
-                                remove(this.selector.selectDaysTemp, s => s.id === days[i].id)
+                                remove(this.selector.selectedDaysTemp, s => s.id === days[i].id)
                             }
                         }
                     }
                 }
             }
-            this.loop(this.selector.selectDaysTemp)
+            this.loop(this.selector.selectedDaysTemp)
         },
         mouseupSelection() {
             this.covered()
@@ -193,12 +193,12 @@ export default {
             return { st, sr, sb, sl }
         },
         covered() {
-            this.selector.selectDays.splice(0, this.selector.selectDays.length)
-            this.selector.selectDays.push(...this.selector.selectDaysTemp)
-            this.loop(this.selector.selectDays)
+            this.selector.selectedDays.splice(0, this.selector.selectedDays.length)
+            this.selector.selectedDays.push(...this.selector.selectedDaysTemp)
+            this.loop(this.selector.selectedDays)
         },
-        loop(selectDays = []) {
-            const sdays = selectDays.map(sday => sday.id)
+        loop(selectedDays = []) {
+            const sdays = selectedDays.map(sday => sday.id)
             this.pages.forEach((p, pindex) => {
                 p.days.forEach((_, index) => {
                     this.$set(this.pages[pindex].days[index], 'isSelected', false)

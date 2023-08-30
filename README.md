@@ -70,7 +70,7 @@ example: use vue-contextmenujs module
 ```js 
 methods: {
     contextMenu(selector, e) {
-        // { selectDays } todo
+        // { selectedDays } todo
     }
 }
 ```
