@@ -440,7 +440,7 @@ export default {
                     refresh: true
                 }
                 // Assign day info
-                page.days = this.$locale.getCalendarDays(page)
+                page.days = this.$locale.getCalendarDays.call(this, page)
             }
             return page
         },

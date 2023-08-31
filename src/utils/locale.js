@@ -741,7 +741,7 @@ export default class Locale {
 
     // Builds day components for a given page
     getCalendarDays({ weeks, monthComps, prevMonthComps, nextMonthComps }) {
-        const days = []
+        let days = []
         const { firstDayOfWeek, firstWeekday, isoWeeknumbers, weeknumbers } = monthComps
         const prevMonthDaysToShow = firstWeekday + (firstWeekday < firstDayOfWeek ? daysInWeek : 0) - firstDayOfWeek
         let prevMonth = true
@@ -901,6 +901,7 @@ export default class Locale {
             week++
             weekFromEnd--
         }
+        this.$emit('init-days-method', days, ndays => ndays && (days = ndays))
         return days
     }
 }

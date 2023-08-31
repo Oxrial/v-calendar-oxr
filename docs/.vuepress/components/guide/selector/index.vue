@@ -7,6 +7,7 @@
         :check-selection-covered="day => (check ? day.date.getTime() >= day.todayTime : true)"
         :container-id="containerId"
         @month-context-menu="(selector, e) => menu && contextMenu(selector, e)"
+        @init-days-method="dayInit && initDaysMethod"
     >
         <template v-if="slotDay" #day-content="{ day, attributes: attrs, dayProps, dayEvents, dayClass }">
             <div :class="dayClass" v-bind="dayProps" v-on="dayEvents">
@@ -28,7 +29,7 @@
 
 <script>
 import { generateOptimalTextColor, setColor } from '@/utils/helpers'
-import { flatMap, groupBy, omit, transform } from 'lodash-es'
+import { dropRight, flatMap, groupBy, omit, remove, transform } from 'lodash-es'
 import dayjs from 'dayjs'
 export default {
     name: 'Selector',
@@ -54,6 +55,10 @@ export default {
             default: false
         },
         menu: {
+            type: Boolean,
+            default: false
+        },
+        dayInit: {
             type: Boolean,
             default: false
         }
@@ -167,6 +172,16 @@ export default {
                 zIndex: 3,
                 minWidth: 230
             })
+        },
+        initDaysMethod(days, cb) {
+            const last7d = days[days.length - 1 - 6]
+            const doms = Array.from(document.getElementsByClassName('custom-calendar'))
+            if (last7d && !last7d.inMonth) {
+                cb(dropRight(days, 7))
+                doms.forEach(dom => dom.style.setProperty('--day-height', 90 + 90 / 5 + 'px'))
+            } else {
+                doms.forEach(dom => dom.style.setProperty('--day-height', 90 + 'px'))
+            }
         }
     }
 }

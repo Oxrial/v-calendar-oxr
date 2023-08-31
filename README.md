@@ -79,6 +79,31 @@ methods: {
 
 ![](./docs/images/3.png)
 
+### init-days-method
+Perform additional logic processing before returning the generated "days" of the month.
+
+```html
+    <v-calendar
+        :attributes="attributes"
+        @init-days-method="dayInit && initDaysMethod"
+    />
+```
+
+```js
+methods: {
+    initDaysMethod(days, cb) {
+        const last7d = days[days.length - 1 - 6]
+        const doms = Array.from(document.getElementsByClassName('custom-calendar'))
+        if (last7d && !last7d.inMonth) {
+            cb(dropRight(days, 7))
+            doms.forEach(dom => dom.style.setProperty('--day-height', 90 + 90 / 5 + 'px'))
+        } else {
+            doms.forEach(dom => dom.style.setProperty('--day-height', 90 + 'px'))
+        }
+    }
+}
+```
+
 ## Scoped Slot
 ### day-content (dayClass <i>**(new)**</i> export default day-content)
 
