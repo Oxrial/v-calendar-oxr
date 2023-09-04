@@ -7,7 +7,7 @@
         :check-selection-covered="day => (check ? day.date.getTime() >= day.todayTime : true)"
         :container-id="containerId"
         @month-context-menu="(selector, e) => menu && contextMenu(selector, e)"
-        @init-days-method="dayInit && initDaysMethod"
+        @init-days-method="(days, cb) => dayInit && initDaysMethod(days, cb)"
     >
         <template v-if="slotDay" #day-content="{ day, attributes: attrs, dayProps, dayEvents, dayClass }">
             <div :class="dayClass" v-bind="dayProps" v-on="dayEvents">
@@ -175,13 +175,21 @@ export default {
         },
         initDaysMethod(days, cb) {
             const last7d = days[days.length - 1 - 6]
-            const doms = Array.from(document.getElementsByClassName('custom-calendar'))
+            const dayHeight = 90
             if (last7d && !last7d.inMonth) {
+                this.setDayHeigth(1.2 * dayHeight)
+                console.log(dropRight(days, 7))
                 cb(dropRight(days, 7))
-                doms.forEach(dom => dom.style.setProperty('--day-height', 90 + 90 / 5 + 'px'))
             } else {
-                doms.forEach(dom => dom.style.setProperty('--day-height', 90 + 'px'))
+                this.setDayHeigth(dayHeight)
+                cb(days)
             }
+        },
+        setDayHeigth(dayHeight) {
+            this.$nextTick(() => {
+                const dom = document.querySelector(`#${this.containerId}.custom-calendar`)
+                dom.style.setProperty('--day-height', dayHeight + 'px')
+            })
         }
     }
 }

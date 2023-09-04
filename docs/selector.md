@@ -104,6 +104,9 @@ methods: {
 }
 ```
 
+<guide-selector-index slot-day container-id="month5" 
+        :is-selector="false" dayInit />
+
 ## Scoped Slot
 ### day-content (dayClass <i>**(new)**</i> export default day-content)
 

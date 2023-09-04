@@ -54,6 +54,10 @@ export default {
         containerId: {
             type: String,
             default: 'month'
+        },
+        checkSelectionOversize: {
+            type: Number,
+            default: 20
         }
     },
     data() {
@@ -128,13 +132,21 @@ export default {
             this.selector.shiftDown = false
             this.selector.ctrlDown = false
         },
-        moveselecttion(even) {
-            this.selector.isShowSelectBox = true
+        moveselecttion(e) {
             const { downX, downY } = this.selector
-            this.selector.selectBox.style.left = Math.min(even.clientX, downX) + 'px'
-            this.selector.selectBox.style.top = Math.min(even.clientY, downY) + 'px'
-            this.selector.selectBox.style.width = Math.abs(downX - even.clientX) + 'px'
-            this.selector.selectBox.style.height = Math.abs(downY - even.clientY) + 'px'
+            const width = Math.abs(downX - e.clientX)
+            const height = Math.abs(downY - e.clientY)
+            // delay
+            if (!this.selector.isShowSelectBox && (width >= this.checkSelectionOversize || height >= this.checkSelectionOversize)) {
+                this.selector.isShowSelectBox = true
+                this.moving(e, downX, downY, width, height)
+            } else this.moving(e, downX, downY, width, height)
+        },
+        moving(e, downX, downY, width, height) {
+            this.selector.selectBox.style.left = Math.min(e.clientX, downX) + 'px'
+            this.selector.selectBox.style.top = Math.min(e.clientY, downY) + 'px'
+            this.selector.selectBox.style.width = width + 'px'
+            this.selector.selectBox.style.height = height + 'px'
             this.moveCover()
         },
         moveCover() {

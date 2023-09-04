@@ -440,7 +440,9 @@ export default {
                     refresh: true
                 }
                 // Assign day info
-                page.days = this.$locale.getCalendarDays.call(this, page)
+                let days = this.$locale.getCalendarDays(page)
+                this.$emit('init-days-method', days, ndays => ndays && (days = ndays))
+                page.days = days
             }
             return page
         },
