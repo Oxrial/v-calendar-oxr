@@ -67,7 +67,7 @@ methods: {
     />
 ```
 
-<guide-selector-index container-id="month6" :check-selection-oversize=“40” />
+<guide-selector-index container-id="month6" :check-selection-oversize="40" />
 
 ### context menu event
 example: use vue-contextmenujs module
