@@ -6,6 +6,7 @@
         :is-selector="isSelector"
         :check-selection-covered="day => (check ? day.date.getTime() >= day.todayTime : true)"
         :container-id="containerId"
+        :check-selection-oversize="checkSelectionOversize"
         @month-context-menu="(selector, e) => menu && contextMenu(selector, e)"
         @init-days-method="(days, cb) => dayInit && initDaysMethod(days, cb)"
     >
@@ -61,6 +62,10 @@ export default {
         dayInit: {
             type: Boolean,
             default: false
+        },
+        checkSelectionOversize: {
+            type: Number,
+            default: 20
         }
     },
     data() {

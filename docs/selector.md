@@ -56,6 +56,19 @@ methods: {
 
 ![](./images/2.png)
 
+### check selection oversize
+当选区大小超过[checkSelectionOversize^2]时生效，默认20，px
+
+```html
+    <v-calendar
+        :attributes="attributes"
+        is-selector
+        :check-selection-oversize="40"
+    />
+```
+
+<guide-selector-index container-id="month6" :check-selection-oversize=“40” />
+
 ### context menu event
 example: use vue-contextmenujs module
 

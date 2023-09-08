@@ -23,6 +23,7 @@
     "lib"
   ],
   "dependencies": {
+    "build": "^0.1.4",
     "core-js": "^3.32.1",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
