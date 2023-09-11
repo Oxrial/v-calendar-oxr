@@ -360,7 +360,7 @@ export default {
                 this.transitionName = this.getPageTransition(this.pages[0], pages[0], transition)
                 // Assign the new pages
                 this.pages = pages
-                this.isSelector && this.selectorInit()
+                this.selectorInit()
                 // Emit page update events
                 this.$emit('update:from-page', fromPage)
                 this.$emit('update:to-page', toPage)
@@ -598,7 +598,7 @@ export default {
                         this.lastFocusedDay = null
                         this.$emit('dayfocusout', e)
                     },
-                    ...((this.isSelector && this.selector.paneEvents) || {})
+                    ...(this.selector.paneEvents || {})
                 },
                 scopedSlots: this.$scopedSlots,
                 key: page.key,
@@ -726,14 +726,14 @@ export default {
                     }
                 ],
                 on: {
-                    ...((this.isSelector && this.selector.containerEvents) || {}),
+                    ...(this.selector.containerEvents || {}),
                     keydown: this.handleKeydown,
                     mouseup: e => e.preventDefault()
                 },
                 ref: 'container'
             },
             [
-                this.isSelector && selectorRender.call(this, h),
+                selectorRender.call(this, h),
                 getNavPopover(),
                 h(
                     'div',

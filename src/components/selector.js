@@ -66,10 +66,10 @@ export default {
         }
     },
     created() {
-        this.isSelector && !this.selector && (this.selector = new Selector())
+        !this.selector && (this.selector = new Selector())
     },
     destroyed() {
-        this.isSelector && this.selectorClear(false)
+        this.selectorClear(false)
     },
     methods: {
         selectorInit() {
@@ -96,6 +96,7 @@ export default {
             flag && this.selectorInit()
         },
         handleBox(e) {
+            if (!this.isSelector) return
             e.stopPropagation()
             if (e.button === 0) {
                 if (!this.selector.ctrlDown && !this.selector.shiftDown && this.selector.selectedDays.length !== 0) {
@@ -222,6 +223,7 @@ export default {
             this.$emit('dayclick', day)
         },
         contextMenu(e) {
+            if (!this.isSelector) return
             e.preventDefault()
             this.$emit('month-context-menu', this.selector, e)
             return false
