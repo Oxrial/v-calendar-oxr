@@ -180,20 +180,19 @@ export default {
         },
         initDaysMethod(days, cb) {
             const last7d = days[days.length - 1 - 6]
-            const dayHeight = 90
             if (last7d && !last7d.inMonth) {
-                this.setDayHeigth(1.2 * dayHeight)
-                console.log(dropRight(days, 7))
+                this.setDayHeigth(1 + 1 / 5)
                 cb(dropRight(days, 7))
             } else {
-                this.setDayHeigth(dayHeight)
+                this.setDayHeigth(1)
                 cb(days)
             }
         },
-        setDayHeigth(dayHeight) {
+        setDayHeigth(coefficient) {
             this.$nextTick(() => {
                 const dom = document.querySelector(`#${this.containerId}.custom-calendar`)
-                dom.style.setProperty('--day-height', dayHeight + 'px')
+                const dayHeight = window.getComputedStyle(dom).getPropertyValue('--day-origin-height').replace('px', '')
+                dom.style.setProperty('--day-height', dayHeight * coefficient + 'px')
             })
         }
     }
@@ -204,6 +203,7 @@ export default {
     --day-border: 1px solid #b8c2cc;
     --day-border-highlight: 1px solid #b8c2cc;
     --day-width: 90px;
+    --day-origin-height: 90px;
     --day-height: 90px;
     --weekday-bg: #f8fafc;
     --weekday-border: 1px solid #eaeaea;

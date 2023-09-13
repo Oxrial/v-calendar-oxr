@@ -597,8 +597,7 @@ export default {
                     dayfocusout: e => {
                         this.lastFocusedDay = null
                         this.$emit('dayfocusout', e)
-                    },
-                    ...(this.selector.paneEvents || {})
+                    }
                 },
                 scopedSlots: this.$scopedSlots,
                 key: page.key,

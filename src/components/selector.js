@@ -13,7 +13,6 @@ export class Selector {
     downX = 0
     downY = 0
     containerEvents = null
-    paneEvents = null
 }
 export function selectorRender(h) {
     return h(
@@ -81,9 +80,6 @@ export default {
                 this.selector.containerEvents = {
                     mousedown: this.handleBox,
                     contextmenu: this.contextMenu
-                }
-                this.selector.paneEvents = {
-                    dayclick: this.dayclick
                 }
             })
         },
@@ -199,8 +195,8 @@ export default {
             const { left, top, width, height } = this.selector.selectBox.style
             const sl = parseInt(left)
             const st = parseInt(top)
-            const sw = parseInt(width)
-            const sh = parseInt(height)
+            const sw = parseInt(width) || 0
+            const sh = parseInt(height) || 0
             const sb = st + sh
             const sr = sl + sw
             return { st, sr, sb, sl }
