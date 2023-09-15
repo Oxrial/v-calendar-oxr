@@ -1,6 +1,6 @@
 {
   "name": "v-calendar-oxr",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "private": false,
   "description": "A based from https://github.com/nathanreyes/v-calendar，selector support",
   "author": "Oxrial",

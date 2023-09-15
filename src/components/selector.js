@@ -92,6 +92,7 @@ export default {
             flag && this.selectorInit()
         },
         handleBox(e) {
+            this.$emit('selection-before', e, this.selector)
             if (!this.isSelector) return
             e.stopPropagation()
             if (e.button === 0) {

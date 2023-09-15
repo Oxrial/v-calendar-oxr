@@ -7,6 +7,7 @@
         :check-selection-covered="day => (check ? day.date.getTime() >= day.todayTime : true)"
         :container-id="containerId"
         :check-selection-oversize="checkSelectionOversize"
+        @selection-before="selectionBefore"
         @month-context-menu="(selector, e) => menu && contextMenu(selector, e)"
         @init-days-method="(days, cb) => dayInit && initDaysMethod(days, cb)"
     >
@@ -132,6 +133,9 @@ export default {
         this.buildAttributes(this.dataAssembleDocs(this.data))
     },
     methods: {
+        selectionBefore(e, selector) {
+            console.log('selectionBefore ~ e, selector>>> :', e, selector)
+        },
         dataAssembleDocs(data = []) {
             return transform(groupBy(data, 'name'), (res, v) => res.push({ ...omit(v[0], 'date'), name: v[0].name, dates: v.map(vi => vi.date) }), [])
         },
