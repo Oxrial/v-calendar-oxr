@@ -57,6 +57,10 @@ export default {
         checkSelectionOversize: {
             type: Number,
             default: 20
+        },
+        ratio: {
+            type: Number,
+            default: 1
         }
     },
     data() {
@@ -101,8 +105,8 @@ export default {
                     this.selector.selectedDaysTemp.splice(0, this.selector.selectedDaysTemp.length)
                     this.loop([])
                 }
-                this.selector.downX = e.clientX * window.devicePixelRatio
-                this.selector.downY = e.clientY * window.devicePixelRatio
+                this.selector.downX = e.clientX * this.ratio
+                this.selector.downY = e.clientY * this.ratio
                 this.selector.selectBox.style.left = this.selector.downX + 'px'
                 this.selector.selectBox.style.top = this.selector.downY + 'px'
                 document.body.addEventListener('mousemove', this.moveselecttion)
@@ -132,8 +136,8 @@ export default {
         },
         moveselecttion(e) {
             const { downX, downY } = this.selector
-            const width = Math.abs(downX - e.clientX * window.devicePixelRatio)
-            const height = Math.abs(downY - e.clientY * window.devicePixelRatio)
+            const width = Math.abs(downX - e.clientX * this.ratio)
+            const height = Math.abs(downY - e.clientY * this.ratio)
             // delay
             if (!this.selector.isShowSelectBox && (width >= this.checkSelectionOversize || height >= this.checkSelectionOversize)) {
                 this.selector.isShowSelectBox = true
@@ -141,8 +145,8 @@ export default {
             } else this.moving(e, downX, downY, width, height)
         },
         moving(e, downX, downY, width, height) {
-            this.selector.selectBox.style.left = Math.min(e.clientX * window.devicePixelRatio, downX) + 'px'
-            this.selector.selectBox.style.top = Math.min(e.clientY * window.devicePixelRatio, downY) + 'px'
+            this.selector.selectBox.style.left = Math.min(e.clientX * this.ratio, downX) + 'px'
+            this.selector.selectBox.style.top = Math.min(e.clientY * this.ratio, downY) + 'px'
             this.selector.selectBox.style.width = width + 'px'
             this.selector.selectBox.style.height = height + 'px'
             this.moveCover()
