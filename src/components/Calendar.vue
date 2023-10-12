@@ -590,6 +590,7 @@ export default {
                 },
                 on: {
                     ...this.$listeners,
+                    dayclick: this.dayclick,
                     dayfocusin: e => {
                         this.lastFocusedDay = e
                         this.$emit('dayfocusin', e)
