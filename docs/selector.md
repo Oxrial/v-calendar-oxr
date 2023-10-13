@@ -163,3 +163,15 @@ methods: {
 <guide-selector-index slot-selection  container-id="month4" />
 
 ![](./images/4.png)
+
+### 选区与显示器缩放像素换算 Ratio
+当显示器缩放时，鼠标的坐标与实际坐标会有所偏差，需要结合window.devicePixelRatio进行换算，这里提供一个ratio的prop，默认为1
+
+```html
+props: {
+    ratio: {
+        type: Number,
+        default: 1
+    }
+}
+```
